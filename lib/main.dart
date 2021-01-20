@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
       state: LocalizationProvider.of(context).state,
       child: MaterialApp(
         title: 'Flutter Translate Demo',
+        debugShowCheckedModeBanner: false,
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

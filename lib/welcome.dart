@@ -15,6 +15,8 @@ class Welcome extends StatefulWidget{
 class _WelcomeState extends State<Welcome> {
   Future<Album> futureAlbum;
   _WelcomeState({this.futureAlbum});
+
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build

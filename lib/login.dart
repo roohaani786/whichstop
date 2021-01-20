@@ -118,14 +118,14 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 40.0),
+                        padding: const EdgeInsets.only(left: 20.0),
                         child: GestureDetector(
                           onTap: (){
                             Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Register()));
                           },
                           child: Container(
                             height: 40.0,
-                            width: 80.0,
+                            width: 60.0,
                             decoration: BoxDecoration(
                                 color:Colors.red,
                                 border: Border.all(
@@ -136,7 +136,8 @@ class _LoginState extends State<Login> {
                             child: Align(
                               alignment: Alignment.center,
                               child: Text(translate("language.register"),style: TextStyle(
-                                  color: Colors.white
+                                  color: Colors.white,
+                                fontSize: 10.0,
                               ),),
                             ),
                           ),

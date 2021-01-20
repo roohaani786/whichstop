@@ -15,6 +15,12 @@ class _GetLocationState extends State<GetLocationWidget> {
   LocationData _location;
   String _error;
 
+  @override
+  initState() {
+    _getLocation();
+    super.initState();
+  }
+
   Future<void> _getLocation() async {
     setState(() {
       _error = null;
@@ -39,14 +45,6 @@ class _GetLocationState extends State<GetLocationWidget> {
         Text(
           'Location: ' + (_error ?? '${_location ?? "unknown"}'),
           style: Theme.of(context).textTheme.bodyText1,
-        ),
-        Row(
-          children: <Widget>[
-            RaisedButton(
-              child: const Text('Get'),
-              onPressed: _getLocation,
-            )
-          ],
         ),
       ],
     );

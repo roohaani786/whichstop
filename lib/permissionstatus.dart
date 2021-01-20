@@ -14,13 +14,26 @@ class _PermissionStatusState extends State<PermissionStatusWidget> {
 
   PermissionStatus _permissionGranted;
 
+  @override
+  initState() {
+   _checkPermissions();
+   _requestPermission();
+    super.initState();
+  }
+
+
   Future<void> _checkPermissions() async {
     final PermissionStatus permissionGrantedResult =
     await location.hasPermission();
     setState(() {
       _permissionGranted = permissionGrantedResult;
     });
+    if(permissionGrantedResult == false){
+      return SnackBar(content: Text("Oe"));
+    }
   }
+
+
 
   Future<void> _requestPermission() async {
     if (_permissionGranted != PermissionStatus.granted) {
@@ -29,48 +42,41 @@ class _PermissionStatusState extends State<PermissionStatusWidget> {
       setState(() {
         _permissionGranted = permissionRequestedResult;
       });
+      if(permissionRequestedResult ==PermissionStatus.denied){
+
+        showDialog(context: context,builder: (context){
+          return Scaffold(
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("App can't function without this permission"),
+                  RaisedButton(onPressed: (){
+                    SystemNavigator.pop();
+                  },
+                  child: Text("OK"),)
+                ],
+              ),
+            ),
+          );
+        });
+        // SystemNavigator.pop();
+      }
+      }
     }
-    else{
-      showDialog(context: context,child: Text("dsd"));
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          'Permission status: ${_permissionGranted ?? "unknown"}',
-          style: Theme.of(context).textTheme.bodyText1,
-        ),
-        Row(
-          children: <Widget>[
-
-
-            Container(
-              margin: const EdgeInsets.only(right: 42),
-              child: RaisedButton(
-                child: const Text('Check'),
-                onPressed: _checkPermissions,
-              ),
-            ),
-
-            (_permissionGranted == false)?
-     SnackBar(content:Text("You didn't allow location"),
-    action: SnackBarAction(label: "OK", onPressed: (){
-    SystemNavigator.pop();
-    })):Text("ddd"),
-
-            RaisedButton(
-              child: const Text('Request'),
-              onPressed: _permissionGranted == PermissionStatus.granted
-                  ? null
-                  : _requestPermission,
-            )
-          ],
-        )
-      ],
-    );
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            'Permission status: ${_permissionGranted ?? "unknown"}',
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+      (PermissionStatus.denied == _permissionGranted)?
+      Text("Denied"):Text("OOh"),
+        ],
+      );
   }
 }

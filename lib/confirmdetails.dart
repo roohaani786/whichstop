@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:machine_task/login.dart';
 
 import 'album.dart';
 
@@ -150,7 +151,7 @@ class _ConfirmDetailsState extends State<ConfirmDetails> {
                         color: Colors.white
                     ),),
                     Padding(
-                      padding: const EdgeInsets.only(left: 30.0),
+                      padding: const EdgeInsets.only(left: 40.0),
                       child:Text(email,style: TextStyle(
                           color: Colors.white
                       ),),
@@ -168,7 +169,7 @@ class _ConfirmDetailsState extends State<ConfirmDetails> {
                         color: Colors.white
                     ),),
                     Padding(
-                      padding: const EdgeInsets.only(left: 30.0),
+                      padding: const EdgeInsets.only(left: 20.0),
                       child:Text(phoneNumber,style: TextStyle(
                           color: Colors.white
                       ),),
@@ -204,7 +205,7 @@ class _ConfirmDetailsState extends State<ConfirmDetails> {
                         color: Colors.white
                     ),),
                     Padding(
-                      padding: const EdgeInsets.only(left: 30.0),
+                      padding: const EdgeInsets.only(left: 40.0),
                       child:Text(country,style: TextStyle(
                           color: Colors.white
                       ),),
@@ -226,6 +227,7 @@ class _ConfirmDetailsState extends State<ConfirmDetails> {
                       padding: const EdgeInsets.only(left: 30.0),
                       child: RaisedButton(onPressed: (){
                         createAlbum(firstName,lastName,email,password,phoneNumber,country, dob,customer_type);
+                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Login()));
                       },
                         child: Text("Confirm"),),
                     ),
